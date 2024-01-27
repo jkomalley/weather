@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "weather"
+version = "0.1.0"
+description = "A Weather app."
+authors = ["Kyle O'Malley <j.kyle.omalley@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+click = "^8.1.7"
+
+[tool.poetry.scripts]
+weather = "weather.cli:run"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.14"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
