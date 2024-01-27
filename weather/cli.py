@@ -1,0 +1,51 @@
+import click
+from weather import weather
+
+DEGREE_SIGN = chr(176)
+
+
+@click.command()
+@click.option(
+    "-t",
+    "--temp_only",
+    "display",
+    flag_value="tempurature",
+    help="Only display the current tempurature.",
+)
+@click.option(
+    "-c",
+    "--conditions_only",
+    "display",
+    flag_value="conditions",
+    help="Only display the current conditions.",
+)
+@click.option(
+    "-f",
+    "--forecast",
+    "display",
+    flag_value="forecast",
+    help="Display the upcoming forecast.",
+)
+def run(display):
+    w = weather.Weather()
+
+    if display == "tempurature":
+        t = w.getTemperature()
+        print(f"{t}{DEGREE_SIGN}")
+
+    elif display == "conditions":
+        c = w.getConditions()
+        print(f"{c}")
+
+    elif display == "forecast":
+        f = w.getForecast()
+        print(f"{f}")
+
+    else:
+        t = w.getTemperature()
+        c = w.getConditions()
+        print(f"Currently it is {t}{DEGREE_SIGN} and {c}.")
+
+
+if __name__ == "__main__":
+    run()
