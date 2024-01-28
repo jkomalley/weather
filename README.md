@@ -3,7 +3,7 @@ A Weather app.
 
 ## Usage
 ```
-$ weather --help
+$ poetry run weather --help
 Usage: weather [OPTIONS]
 
 Options:
