@@ -27,10 +27,10 @@ DEGREE_SIGN = chr(176)
     help="Display the upcoming forecast.",
 )
 def run(display):
-    w = weather.Weather()
+    w = weather.Weather(39.215833, -76.709167)
 
     if display == "tempurature":
-        t = w.getTemperature()
+        t = w.getCurrentTemperature()
         print(f"{t}{DEGREE_SIGN}")
 
     elif display == "conditions":
@@ -42,7 +42,7 @@ def run(display):
         print(f"{f}")
 
     else:
-        t = w.getTemperature()
+        t = w.getCurrentTemperature()
         c = w.getConditions()
         print(f"Currently it is {t}{DEGREE_SIGN} and {c}.")
 
