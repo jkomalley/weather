@@ -44,7 +44,8 @@ def run(display):
     else:
         t = w.getCurrentTemperature()
         c = w.getConditions()
-        print(f"Currently it is {t}{DEGREE_SIGN} and {c}.")
+        print(f"Tempurature: {t}{DEGREE_SIGN}F")
+        print(f"Weather: {c}")
 
 
 if __name__ == "__main__":
