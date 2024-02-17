@@ -1,5 +1,5 @@
 import requests
-# import json
+import json
 from datetime import datetime, timezone
 
 
@@ -64,7 +64,7 @@ class Weather:
 
         temp = observation["temperature"]["value"]
 
-        if observation["temperature"]["unitCode"] == "wmoUnit:degC":
+        if temp and observation["temperature"]["unitCode"] == "wmoUnit:degC":
             temp = Weather.CtoF(temp)
 
         return temp
@@ -78,7 +78,7 @@ class Weather:
 
         # print(json.dumps(observation, indent=4))
 
-        conditions = observation["textDescription"].lower()
+        conditions = observation["textDescription"]
 
         return conditions
 
@@ -158,8 +158,13 @@ class Weather:
         # print(f"{windSpeed = }")
         # print(f"{windDirection = }")
         # print(json.dumps(observation, indent=4))
+        
+        if windDirection and windSpeed:
+            ret = f"{windDirection = } {windSpeed = } mph"
+        else:
+            ret = None
 
-        return f"{windDirection.upper()} {windSpeed:.0f} mph"
+        return ret
     
     def getLastUpdateTime(self):
         # get station id
@@ -173,6 +178,9 @@ class Weather:
         update_timestamp = observation["timestamp"]
 
         # print(f"{update_timestamp = }")
+
+        if not update_timestamp:
+            return None
 
         utc_update_datetime = datetime.fromisoformat(update_timestamp)
         utc_update_datetime = utc_update_datetime.replace(tzinfo=timezone.utc)
