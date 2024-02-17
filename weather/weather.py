@@ -1,6 +1,6 @@
 import requests
-import json
-# import datetime
+# import json
+from datetime import datetime, timezone
 
 
 class Weather:
@@ -162,9 +162,25 @@ class Weather:
         return f"{windDirection.upper()} {windSpeed:.0f} mph"
     
     def getLastUpdateTime(self):
-        ret = 0
+        # get station id
+        stationId = self._getStationId()
 
-        return ret
+        # get latest observation
+        observation = self._getLatestObservation(stationId)
+
+        # print(json.dumps(observation, indent=4))
+
+        update_timestamp = observation["timestamp"]
+
+        # print(f"{update_timestamp = }")
+
+        utc_update_datetime = datetime.fromisoformat(update_timestamp)
+        utc_update_datetime = utc_update_datetime.replace(tzinfo=timezone.utc)
+        local_update_datetime = utc_update_datetime.astimezone()
+
+        # print(f"{local_update_datetime.strftime("%d %B %I:%M %p %Z")}")
+
+        return local_update_datetime.strftime("%d %B %I:%M %p %Z")
 
     def getForecast(self):
         return "Idk maybe some rain"
