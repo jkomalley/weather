@@ -58,11 +58,11 @@ def run(display):
         for alert in alerts:
             print(f"[bold red]Alert: {alert}[/bold red]")
         print(f" Conditions: [cyan]{c.capitalize()}[/cyan]")
-        print(f"Tempurature: [cyan]{t:.2f}{DEGREE_SIGN}F[/cyan]")
+        print(f"Tempurature: [cyan]{t:.0f}{DEGREE_SIGN}F[/cyan]")
         if wc:
-            print(f" Wind Chill: [cyan]{wc:.2f}{DEGREE_SIGN}F[/cyan]")
-        print(f"   Humidity: [cyan]{h * 100:.2f}%[/cyan]")
-        print(f"  Dew Point: [cyan]{d:.2f}{DEGREE_SIGN}F[/cyan]")
+            print(f" Wind Chill: [cyan]{wc:.0f}{DEGREE_SIGN}F[/cyan]")
+        print(f"   Humidity: [cyan]{h:.0f}%[/cyan]")
+        print(f"  Dew Point: [cyan]{d:.0f}{DEGREE_SIGN}F[/cyan]")
         print(f" Wind Speed: [cyan]{ws}[/cyan]")
         print(f"Last Update: [cyan]{lu}[/cyan]")
 

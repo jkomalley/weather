@@ -65,7 +65,7 @@ class Weather:
         temp = observation["temperature"]["value"]
 
         if observation["temperature"]["unitCode"] == "wmoUnit:degC":
-            temp = (temp * (9.0 / 5.0)) + 32.0
+            temp = Weather.CtoF(temp)
 
         return temp
 
@@ -102,14 +102,42 @@ class Weather:
         return windChill
     
     def getHumidity(self):
-        ret = 0
+        # get station id
+        stationId = self._getStationId()
 
-        return ret
+        # get latest observation
+        observation = self._getLatestObservation(stationId)
+
+        humidity = observation["relativeHumidity"]["value"]
+
+        # units = observation["humidity"]["unitCode"]
+
+        # if humidity and units == "wmoUnit:degC":
+        #     humidity = Weather.CtoF(humidity)
+
+        print(f"{humidity = }")
+        # print(json.dumps(observation, indent=4))
+
+        return humidity
     
     def getDewPoint(self):
-        ret = 0
+        # get station id
+        stationId = self._getStationId()
 
-        return ret
+        # get latest observation
+        observation = self._getLatestObservation(stationId)
+
+        dewpoint = observation["dewpoint"]["value"]
+
+        units = observation["dewpoint"]["unitCode"]
+
+        if dewpoint and units == "wmoUnit:degC":
+            dewpoint = Weather.CtoF(dewpoint)
+
+        print(f"{dewpoint = }")
+        # print(json.dumps(observation, indent=4))
+
+        return dewpoint
     
     def getWindSpeed(self):
         ret = 0
