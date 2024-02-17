@@ -28,8 +28,8 @@ DEGREE_SIGN = chr(176)
     help="Display the upcoming forecast.",
 )
 def run(display):
-    lat = 39.215833
-    lon = -76.709167
+    lat = 39.17
+    lon = -76.68
     w = weather.Weather(lat, lon)
 
     if display == "tempurature":
