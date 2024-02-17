@@ -57,14 +57,14 @@ def run(display):
         print(f"[cyan on blue] Weather near {lat},{lon} [/cyan on blue]")
         for alert in alerts:
             print(f"[bold red]Alert: {alert}[/bold red]")
-        print(f" Conditions: [cyan]{c.capitalize()}[/cyan]")
-        print(f"Tempurature: [cyan]{t:.0f}{DEGREE_SIGN}F[/cyan]")
+        print(f" Conditions: [cyan bold]{c.capitalize()}[/cyan bold]")
+        print(f"Tempurature: [cyan bold]{t:.0f}{DEGREE_SIGN}F[/cyan bold]")
         if wc:
-            print(f" Wind Chill: [cyan]{wc:.0f}{DEGREE_SIGN}F[/cyan]")
-        print(f"   Humidity: [cyan]{h:.0f}%[/cyan]")
-        print(f"  Dew Point: [cyan]{d:.0f}{DEGREE_SIGN}F[/cyan]")
-        print(f" Wind Speed: [cyan]{ws}[/cyan]")
-        print(f"Last Update: [cyan]{lu}[/cyan]")
+            print(f" Wind Chill: [cyan bold]{wc:.0f}{DEGREE_SIGN}F[/cyan bold]")
+        print(f"   Humidity: [cyan bold]{h:.0f}%[/cyan bold]")
+        print(f"  Dew Point: [cyan bold]{d:.0f}{DEGREE_SIGN}F[/cyan bold]")
+        print(f" Wind Speed: [cyan bold]{ws}[/cyan bold]")
+        print(f"Last Update: [cyan bold]{lu}[/cyan bold]")
 
 
 if __name__ == "__main__":

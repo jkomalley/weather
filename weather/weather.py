@@ -115,7 +115,7 @@ class Weather:
         # if humidity and units == "wmoUnit:degC":
         #     humidity = Weather.CtoF(humidity)
 
-        print(f"{humidity = }")
+        # print(f"{humidity = }")
         # print(json.dumps(observation, indent=4))
 
         return humidity
@@ -134,15 +134,32 @@ class Weather:
         if dewpoint and units == "wmoUnit:degC":
             dewpoint = Weather.CtoF(dewpoint)
 
-        print(f"{dewpoint = }")
+        # print(f"{dewpoint = }")
         # print(json.dumps(observation, indent=4))
 
         return dewpoint
     
     def getWindSpeed(self):
-        ret = 0
+        # get station id
+        stationId = self._getStationId()
 
-        return ret
+        # get latest observation
+        observation = self._getLatestObservation(stationId)
+
+        windSpeed = observation["windSpeed"]["value"]
+        units = observation["windSpeed"]["unitCode"]
+        if windSpeed and units == "wmoUnit:km_h-1":
+            windSpeed = Weather.KPHtoMPH(windSpeed)
+
+        windDirection = observation["windDirection"]["value"]
+        if windDirection:
+            windDirection = Weather.degToCardinal(windDirection)
+
+        # print(f"{windSpeed = }")
+        # print(f"{windDirection = }")
+        # print(json.dumps(observation, indent=4))
+
+        return f"{windDirection.upper()} {windSpeed:.0f} mph"
     
     def getLastUpdateTime(self):
         ret = 0
@@ -250,3 +267,11 @@ class Weather:
 
     def CtoF(tempurature):
         return (tempurature * 9.0/5.0) + 32
+
+    def degToCardinal(deg):
+        val=int((deg/22.5)+.5)
+        arr=["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"]
+        return arr[(val % 16)]
+
+    def KPHtoMPH(kph):
+        return kph * 0.621371
