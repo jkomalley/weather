@@ -46,24 +46,25 @@ def run(display):
 
     else:
         alerts = w.getAlerts()
-        t = w.getCurrentTemperature()
         c = w.getConditions()
-        wc = 43.0 # w.getWindChill()
-        h = 0.29 # w.getHumidity()
-        d = 16.0 # w.getDewPoint()
-        ws = "W 9 G 20 mph" # w.getWindSpeed()
-        lu = "16 February 2:54 pm EST" # w.getLastUpdateTime()
+        t = w.getTemperature()
+        wc = w.getWindChill()
+        h = w.getHumidity()
+        d = w.getDewPoint()
+        ws = w.getWindSpeed()
+        lu = w.getLastUpdateTime()
 
-        print(f"[green]Weather near {lat},{lon}[/green]")
+        print(f"[cyan on blue] Weather near {lat},{lon} [/cyan on blue]")
         for alert in alerts:
             print(f"[bold red]Alert: {alert}[/bold red]")
-        print(f" Conditions: {c.capitalize()}")
-        print(f"Tempurature: {t:.2f}{DEGREE_SIGN}F")
-        print(f" Wind Chill: {wc:.2f}{DEGREE_SIGN}F")
-        print(f"   Humidity: {h * 100:.2f}%")
-        print(f"  Dew Point: {d:.2f}{DEGREE_SIGN}F")
-        print(f" Wind Speed: {ws}")
-        print(f"Last Update: {lu}")
+        print(f" Conditions: [cyan]{c.capitalize()}[/cyan]")
+        print(f"Tempurature: [cyan]{t:.2f}{DEGREE_SIGN}F[/cyan]")
+        if wc:
+            print(f" Wind Chill: [cyan]{wc:.2f}{DEGREE_SIGN}F[/cyan]")
+        print(f"   Humidity: [cyan]{h * 100:.2f}%[/cyan]")
+        print(f"  Dew Point: [cyan]{d:.2f}{DEGREE_SIGN}F[/cyan]")
+        print(f" Wind Speed: [cyan]{ws}[/cyan]")
+        print(f"Last Update: [cyan]{lu}[/cyan]")
 
 
 if __name__ == "__main__":

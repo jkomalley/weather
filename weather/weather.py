@@ -1,5 +1,5 @@
 import requests
-# import json
+import json
 # import datetime
 
 
@@ -31,13 +31,9 @@ class Weather:
         # parse zone id from location properties
         zoneId = self.properties["forecastZone"].split("/")[-1]
 
-        print(f"{zoneId = }")
-
         url = self.NWS_API_ADDRESS + self.GET_ACTIVE_ALERTS.format(
             zoneId=zoneId
         )
-
-        # print(f"{url = }")
 
         headers = {"user_agent": self.USER_AGENT, "accept": "application/ld+json"}
 
@@ -54,14 +50,12 @@ class Weather:
         rawAlerts = response.json()["@graph"]
         
         for rawAlert in rawAlerts:
-            print(rawAlert)
-            print(type(rawAlert))
             alert = rawAlert["parameters"]["NWSheadline"][0]
             ret.append(alert)
 
         return ret
 
-    def getCurrentTemperature(self):
+    def getTemperature(self):
         # get station id
         stationId = self._getStationId()
 
@@ -87,6 +81,45 @@ class Weather:
         conditions = observation["textDescription"].lower()
 
         return conditions
+
+    def getWindChill(self):
+        # get station id
+        stationId = self._getStationId()
+
+        # get latest observation
+        observation = self._getLatestObservation(stationId)
+
+        windChill = observation["windChill"]["value"]
+
+        units = observation["windChill"]["unitCode"]
+
+        if windChill and units == "wmoUnit:degC":
+            windChill = Weather.CtoF(windChill)
+
+        # print(f"{windChill = }")
+        # print(json.dumps(observation, indent=4))
+
+        return windChill
+    
+    def getHumidity(self):
+        ret = 0
+
+        return ret
+    
+    def getDewPoint(self):
+        ret = 0
+
+        return ret
+    
+    def getWindSpeed(self):
+        ret = 0
+
+        return ret
+    
+    def getLastUpdateTime(self):
+        ret = 0
+
+        return ret
 
     def getForecast(self):
         return "Idk maybe some rain"
@@ -186,3 +219,6 @@ class Weather:
         metadata = response.json()
 
         return metadata
+
+    def CtoF(tempurature):
+        return (tempurature * 9.0/5.0) + 32
